@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useContext, useReducer, useEffect } from 'react';
 
 // Reducers & Actions
 import rootReducer from './reducers';
@@ -8,6 +8,9 @@ import { init } from './actions';
 import Menu from './components/Menu';
 import TaskList from './components/TaskList';
 import Login from './components/Login';
+
+const DispatchContext = useContext();
+const StateContext = useContext();
 
 function App() {
   const [state, dispatch] = useReducer(rootReducer, {
@@ -24,16 +27,19 @@ function App() {
 
   return (
     <div className="App">
-      {!state.isLoggedIn ? 
-        (<Login />) : 
-        (
-          <>
-            <Menu />
-            <TaskList />
-          </>
-        )
-      }
-            
+      <DispatchContext value={dispatch}>
+        <StateContext value={state}>
+          {!state.isLoggedIn ?
+            (<Login />) :
+            (
+              <>
+                <Menu />
+                <TaskList />
+              </>
+            )
+          }
+        </StateContext>
+      </DispatchContext>
     </div>
   );
 }
