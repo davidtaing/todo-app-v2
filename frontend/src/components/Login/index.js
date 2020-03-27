@@ -2,10 +2,17 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-const Login = () => {
+import { setLoginPending } from '../../actions/userActions';
+
+const Login = ({dispatch}) => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(setLoginPending("adavidtaing@gmail.com", "strongpassword"));
+    }
+
     return (
         <div>
-            <form className="login">
+            <form className="login" onSubmit={handleSubmit}>
                 <TextField
                     placeholder="Email Address"
                     type="email"

@@ -1,16 +1,19 @@
-import React, { useContext, useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 // Reducers & Actions
 import rootReducer from './reducers';
 import { init } from './actions';
 
 // Components
-import Menu from './components/Menu';
-import TaskList from './components/TaskList';
+import LandingPage from './/components/LandingPage';
 import Login from './components/Login';
 
-const DispatchContext = useContext();
-const StateContext = useContext();
 
 function App() {
   const [state, dispatch] = useReducer(rootReducer, {
@@ -26,21 +29,24 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <DispatchContext value={dispatch}>
-        <StateContext value={state}>
-          {!state.isLoggedIn ?
-            (<Login />) :
-            (
-              <>
-                <Menu />
-                <TaskList />
-              </>
-            )
-          }
-        </StateContext>
-      </DispatchContext>
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route exact path="/">
+            <LandingPage />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/register">
+            <h1>Register Page</h1>
+          </Route>
+          <Route path="/home">
+            <h1>Home Page</h1>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
