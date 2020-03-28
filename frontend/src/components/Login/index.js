@@ -1,39 +1,24 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 
 import { setLoginPending } from '../../actions/userActions';
 
 const Login = ({dispatch}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(setLoginPending("adavidtaing@gmail.com", "strongpassword"));
+        // dispatch(setLoginPending("adavidtaing@gmail.com", "strongpassword"));
     }
 
     return (
         <div>
             <form className="login" onSubmit={handleSubmit}>
-                <TextField
-                    placeholder="Email Address"
-                    type="email"
-                    required={true}
-                    autoFocus={true}
-                />
+                <label htmlFor="email">Email Address:</label>
+                <input type="email" id="email" />
                 <br />
-                <TextField
-                    placeholder="Password"
-                    type="password"
-                    required={true}
-                />
+                <label htmlFor="password">Password: </label>
+                <input type="password" id="password" />
                 <br />
+                <button type="submit" id="submit">Submit</button>
                 <br />
-                <Button
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                >
-                    Login
-                </Button>
             </form>
         </div>
     );
