@@ -36,7 +36,7 @@ function App() {
             <LandingPage />
           </Route>
           <Route path="/login">
-            <Login />
+            <Login dispatch={dispatch} />
           </Route>
           <Route path="/register">
             <h1>Register Page</h1>
